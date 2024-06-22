@@ -6,7 +6,7 @@ import shutil
 def setup_marimoserver():
 	exe = shutil.which('marimo', path=os.path.expanduser(os.path.join('~', '.local', 'bin')) + os.pathsep + os.environ.get('PATH', os.defpath)) or 'marimo'
 	return {
-		'command': [exe, 'edit', '--port', '{port}', '--base-url', '/user/' + os.environ['JUPYTERHUB_USER'] + '/marimo', '--no-token', '--headless'],
+		'command': [exe, 'edit', '--port', '{port}', '--base-url', os.environ['JUPYTERHUB_SERVICE_PREFIX'] + '/marimo', '--no-token', '--headless'],
 		'timeout': 60,
 		'absolute_url': True,
 		'launcher_entry': {
