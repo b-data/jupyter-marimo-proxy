@@ -12,7 +12,7 @@ def setup_marimoserver():
     if os.path.exists(userbin) and not userbin in path:
         path = userbin + os.pathsep + path
 
-    marimobin = os.path.expandvars(os.path.expanduser(os.environ.get('JUPYTERMARIMOPROXY_PATH')))
+    marimobin = os.path.expandvars(os.path.expanduser(os.getenv("JUPYTERMARIMOPROXY_PATH", "")))
     if marimobin and os.path.exists(marimobin) and not marimobin in path:
         path = marimobin + os.pathsep + path
 
