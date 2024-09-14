@@ -51,10 +51,10 @@ RUN	useradd -ms /bin/bash demo
 
 ## Executable search path modification
 
-`jupyter-marimo-proxy` provides search path modification by environment variable
-`JUPYTERMARIMOPROXY_PATH`.
+`jupyter-marimo-proxy` provides search path modification by setting a single
+path for environment variable `JUPYTERMARIMOPROXY_PATH`.
 
-Setting `JUPYTERMARIMOPROXY_PATH` to `$HOME/.local/bin:$HOME/bin` is not
+Setting `JUPYTERMARIMOPROXY_PATH` to `$HOME/.local/bin` or `$HOME/bin` is not
 required. `$HOME/.local/bin` and `$HOME/bin` are automatically prepended at
 runtime if these directories exist.
 
