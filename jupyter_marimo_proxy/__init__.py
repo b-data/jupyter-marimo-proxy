@@ -23,7 +23,7 @@ def setup_marimoserver():
             "--port",
             "{port}",
             "--base-url",
-            os.environ["JUPYTERHUB_SERVICE_PREFIX"] + "marimo",
+            os.getenv("JUPYTERHUB_SERVICE_PREFIX", "/") + "marimo",
             "--no-token",
             "--headless",
         ],
