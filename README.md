@@ -51,18 +51,15 @@ RUN	useradd -ms /bin/bash demo
 
 ## Executable search path modification
 
-For search path modifications that should be available to all users, I'd recommend invoking **Jupyter** with the desired search path, e.g., by setting `PATH` in the Dockerfile or an entrypoint wrapper. On some deployments, it may be impractical to set up the search path before/while invoking **Jupyter**, such as when the exact paths must be resolved at runtime. `jupyter-marimo-proxy` provides two ways to modify the search path: by environment variable or by configuration file.
+`jupyter-marimo-proxy` provides search path modification by environment variable
+`JUPYTERMARIMOPROXY_PATH`.
 
-For example, to prepend `~/.local/bin:~/bin` to the search path, one could set environment variable `JUPYTERMARIMOPROXY_PATH` to `~/.local/bin:~/bin:$PATH` or create a configuration file `~/.jupytermarimoproxyrc` containing:
+Setting `JUPYTERMARIMOPROXY_PATH` to `$HOME/.local/bin:$HOME/bin` is not
+required. `$HOME/.local/bin` and `$HOME/bin` are automatically prepended at
+runtime if these directories exist.
 
-```ini
-[DEFAULT]
-path = ~/.local/bin:~/bin:$PATH
-```
-
-If using the environment variable, `JUPYTERMARIMOPROXY_PATH` may need to be added to [`c.Spawner.env_keep`](https://jupyterhub.readthedocs.io/en/stable/reference/api/spawner.html#jupyterhub.spawner.Spawner.env_keep) in the **JupyterHub** configuration.
-
-Both methods support home directory and environment variable expansion, and the `JUPYTERMARIMOPROXY_PATH` variable may be subject to double-expansion if not properly escaped or quoted. If the environment variable and the configuration option were both present, the environment variable would take precedence.
+`JUPYTERMARIMOPROXY_PATH` may need to be added to [`c.Spawner.env_keep`](https://jupyterhub.readthedocs.io/en/stable/reference/api/spawner.html#jupyterhub.spawner.Spawner.env_keep)
+in the **JupyterHub** configuration.
 
 ## Usage with DockerSpawner
 

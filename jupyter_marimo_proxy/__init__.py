@@ -12,6 +12,10 @@ def setup_marimoserver():
     if os.path.exists(userbin) and not userbin in path:
         path = userbin + os.pathsep + path
 
+    marimobin = os.environ.get('JUPYTERMARIMOPROXY_PATH')
+    if marimobin and os.path.exists(marimobin) and not marimobin in path:
+        path = marimobin + os.pathsep + path
+
     return {
         "command": [
             "marimo",
